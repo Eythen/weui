@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>商机询盘</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/weui.min.css">
+		<link rel="stylesheet" href="../../css/jquery-weui.css">
+		<link rel="stylesheet" href="../../css/jquery-labelauty.css">
+		<link rel="stylesheet" href="../../css/app.css">
+
+		<style>
+			.bg-warning {background-color: rgba(0, 0, 0, 0.6);}
+			.scroll{background: #f5f5f5;position:absolute; overflow:scroll; -webkit-overflow-scrolling: touch; top:44px; left:0; bottom:44px; right:0;}
+		</style>
+	</head>
+
+	<body ontouchstart>
+
+		<header class="header_bar">
+			<div class="header_fl">
+				<a href="../mine/mine.html" class="icon icon-back"></a>
+			</div>
+			<div class="header_ct">预约设置</div>
+			<div class="header_fr"></div>
+		</header>
+
+		<div class="scroll">
+			<div class="reserve-tip">
+				根据自身业务能力选择行业，会向您推送此行业商业信息。<span>点击行业名称，选择/取消选择，最多只能关注3个品类！</span>
+			</div>
+			<div class="reserve-bg">
+				<h1>询盘类型</h1>
+				<ul class="sort dowebok">
+					<li><input type="checkbox" name="checkbox" data-labelauty="终端采购"></li>
+					<li><input type="checkbox" name="checkbox" data-labelauty="普通采购"></li>
+					<li><input type="checkbox" name="checkbox" data-labelauty="招标采购"></li>
+					<li><input type="checkbox" name="checkbox" data-labelauty="二手信息"></li>
+				</ul>
+			</div>
+
+			<div class="reserve-bg">
+				<h1>分类</h1>
+				<ul class="sort dowebok">
+					<li><input type="checkbox" name="fruit" data-labelauty="发电机"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="空压机"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="工程建筑机械"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="机床设备"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="清洁设备"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="制冷设备"></li>
+				</ul>
+			</div>
+
+			<div class="reserve-bg">
+				<h1>地区</h1>
+				<ul class="sort dowebok">
+					<li><input type="checkbox" name="checkbox" class="goodscheck shopCheck" data-labelauty="全国"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="江浙"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="山东"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="陕西"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="重庆"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="安徽"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="福建"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="河南"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="河北"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="湖北"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="湖南"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="江西"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="云南"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="香港"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="黑龙江"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="内蒙古"></li>
+				</ul>
+			</div>
+
+			<a class="btn-save" href="#">保存</a>
+		</div>
+
+		<script src="../../js/jquery.min.js"></script>
+		<script src="../../js/jquery-labelauty.js"></script>
+		<script src="../../js/fastclick.js"></script>
+		<script>
+			$(function() {
+				FastClick.attach(document.body);
+				
+				// 美化多选复合框
+				$('.dowebok :input').labelauty();
+
+				// 分类至少选择三个以下
+				function checkbox(arr, x) {
+					for(var i = 0; i < arr.length; i++) {
+						(function(n) {
+							arr[n].onclick = function() {
+								var i = x;
+								for(var l = 0, len = arr.length; l < len; l++) {
+									if(arr[l].checked) {
+										i--;
+										if(i == 0) {
+											arr[n].checked = false;
+											//alert("不能超过" + x + "项！");
+											$.toptip('只能选择三个分类', 'warning');
+											break;
+										}
+									}
+								}
+							}
+						})(i)
+					}
+				}
+				var fruit = document.getElementsByName("fruit");
+				checkbox(fruit, 4);
+
+				// 地区全选
+				$(".goodsCheck").click(function() {
+					var goods = $(this).closest(".dowebok").find(".goodsCheck");
+					var goodsC = $(this).closest(".dowebok").find(".goodsCheck:checked");
+					var Shops = $(this).closest(".dowebok").find(".shopCheck");
+					if(goods.length == goodsC.length) {
+						Shops.prop('checked', true);
+					} else {
+						Shops.prop('checked', false);
+					}
+				});
+				$(".shopCheck").click(function() {
+					if($(this).prop("checked") == true) {
+						$(this).parents(".dowebok").find(".goodscheck").prop('checked', true);
+					} else {
+						$(this).parents(".dowebok").find(".goodscheck").prop('checked', false);
+					}
+				});
+			});
+		</script>
+		<script src="../../js/jquery-weui.js"></script>
+	</body>
+
+</html>

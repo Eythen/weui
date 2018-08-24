@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>消息通知</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/weui.min.css">
+		<link rel="stylesheet" href="../../css/jquery-weui.css">
+		<link rel="stylesheet" href="../../css/mescroll.min.css">
+		<link rel="stylesheet" href="../../css/app.css">
+		<style>
+			body {background: #f5f5f5;}
+			.mescroll { position: fixed; top: 44px; bottom: 0; width: 100%; height: auto; }
+			.weui-loadmore_line .weui-loadmore__tips{ background: #f5f5f5;}
+			.weui-toast_content{ padding-bottom: 10px; font-size: 16px;}
+		</style>
+	</head>
+
+	<body ontouchstart>
+
+		<header class="header_bar">
+			<div class="header_fl">
+				<a href="../mine/mine.html" class="icon icon-back"></a>
+			</div>
+			<div class="header_ct">消息通知</div>
+			<div class="header_fr"></div>
+		</header>
+
+		<div id="mescroll" class="mescroll">
+			<ul id="newslist" class="newslist">
+				<!--<li>
+					<div class="list-li">
+						<i></i>
+						<h4>由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</h4>
+						<p>2018-05-04 11:00</p>
+						<div class="btn-del" onclick="del(this)">删除</div>
+				    </div>
+				</li>-->
+			</ul>
+		</div>
+
+		<script src="../../js/jquery-2.1.4.js"></script>
+		<script src="../../js/jquery-weui.js"></script>
+		<script src="../../js/mescroll.min.js"></script>
+		<script>
+			
+			$(function() {
+			    // 列表展示加载
+				var totalSize = 0;
+				var mescroll = new MeScroll("mescroll", {
+					up: {
+						callback: getListData,
+						isBounce: false,
+						noMoreSize: 0,
+						empty: {
+							icon: "../../images/search.png",
+							tip: "暂无相关数据",
+						},
+						clearEmptyId: "newslist",
+						toTop: {
+							src: "../../images/totop.png",
+							offset: 500
+						}
+					}
+				})
+				/*联网加载列表数据  page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
+				function getListData(page) {
+					//联网加载数据
+					getListDataFromNet(page.num, page.size, function(curPageData) {
+						console.log("page.num=" + page.num + ", page.size=" + page.size + ", curPageData.length=" + curPageData.length);
+						mescroll.endBySize(curPageData.length, curPageData.totalSize);
+						setListData(curPageData);
+					}, function() {
+						mescroll.endErr();
+					});
+				}
+				/*列表数据*/
+				function setListData(curPageData) {
+					var listDom = document.getElementById("newslist");
+					for(var i = 0; i < curPageData.length; i++) {
+						var el = curPageData[i];
+
+						var str = '<div class="list-li" onblur="this.placeholder="details.html"">';
+						    str += '<i></i>';
+							str += '<h4>' + el.name + '</h4>';
+							str += '<p>' + el.time + '</p>';
+							str += '<div class="btn-del" onclick="del(this)">删除</div>';
+					        str += '</div>';
+
+						var liDom = document.createElement("li");
+						liDom.innerHTML = str;
+						listDom.appendChild(liDom);
+					}
+				}
+
+				/*联网加载列表数据*/
+				function getListDataFromNet(pageNum, pageSize, successCallback, errorCallback) {
+					setTimeout(function() {
+						$.ajax({
+							type: 'GET',
+							url: '../../json/news.json',
+							dataType: 'json',
+							success: function(data) {
+								//模拟分页数据
+								var listData = [];
+								for(var i = 0; i < pageSize; i++) {
+									if(i == data.length) break;
+									listData.push(data[i]);
+								}
+								successCallback(listData);
+							},
+							error: errorCallback
+						});
+					}, 1000)
+				}
+			});
+			
+			
+			// 手机向左滑动删除
+			window.addEventListener('load', function() {
+				var initX; //触摸位置  
+				var moveX; //滑动时的位置  
+				var X = 0; //移动距离 
+				var objX = 0; //目标对象位置  
+				window.addEventListener('touchstart', function(event) {
+					//event.preventDefault();
+					var obj = event.target.parentNode;
+					if(obj.className == "list-li") {
+						initX = event.targetTouches[0].pageX;
+						objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+					}
+					if(objX == 0) {
+						window.addEventListener('touchmove', function(event) {
+							//event.preventDefault();
+							var obj = event.target.parentNode;
+							if(obj.className == "list-li") {
+								moveX = event.targetTouches[0].pageX;
+								X = moveX - initX;
+								if(X >= 0) {
+									obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+								} else if(X < 0) {
+									var l = Math.abs(X);
+									obj.style.WebkitTransform = "translateX(" + -l + "px)";
+									if(l > 80) {
+										l = 80;
+										obj.style.WebkitTransform = "translateX(" + -l + "px)";
+									}
+								}
+							}
+						});
+					} else if(objX < 0) {
+						window.addEventListener('touchmove', function(event) {
+							//event.preventDefault();
+							var obj = event.target.parentNode;
+							if(obj.className == "list-li") {
+								moveX = event.targetTouches[0].pageX;
+								X = moveX - initX;
+								if(X >= 0) {
+									var r = -80 + Math.abs(X);
+									obj.style.WebkitTransform = "translateX(" + r + "px)";
+									if(r > 0) {
+										r = 0;
+										obj.style.WebkitTransform = "translateX(" + r + "px)";
+									}
+								} else { //向左滑动       
+									obj.style.WebkitTransform = "translateX(" + -80 + "px)";
+								}
+							}
+						});
+					}
+				}) 
+				window.addEventListener('touchend', function(event) {
+					//event.preventDefault();
+					var obj = event.target.parentNode;
+					if(obj.className == "list-li") {
+						objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+						if(objX > -40) {
+							obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+							objX = 0;
+						} else {
+							obj.style.WebkitTransform = "translateX(" + -80 + "px)";
+							objX = -80;
+						}
+					}
+				})
+			})
+			function del(id) {
+				var del = $(id).parents('li');
+				del.remove();
+				//var id = del.attr("id");
+				//alert("移除数据id="+id);
+				$.toast("已删除", function() {
+					console.log('close');
+				});
+			};
+			
+			
+
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>商机询盘</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/weui.min.css">
+		<link rel="stylesheet" href="../../css/jquery-weui.css">
+		<link rel="stylesheet" href="../../css/app.css">
+		<style>
+			.bg-warning {background-color: rgba(0, 0, 0, 0.6);}
+			.scroll{background: #f5f5f5;position:absolute; overflow:scroll; -webkit-overflow-scrolling: touch; top:0; left:0; bottom:0; right:0;}
+		</style>
+	</head>
+
+	<body ontouchstart>
+		
+		<div class="scroll">
+			<div class="weui-page">
+				<div class="weui-bar">
+					<a href="../mine/mine.html">
+						<div class="icon">
+							<i class="icon-back"></i>
+						</div>
+					</a>
+				</div>
+				<div class="punch_h">
+					<div class="punch page">
+			            <div class="check_in sign-date">
+			            	<img class="sign-date-1" src="../../images/check-in.png">
+			            </div>
+			            <input type="button" class="bui-btn signedin check_indanger" id="daka" value="打卡签到" onclick="this.value='今日已打卡'">
+			            <div class="Signin">连续签到<i id="num">0</i>天</div>
+					</div>
+				</div>
+				<div class="loadmore">
+		            <span class="loadmore_tips">签到记录</span>
+		        </div>
+		        <div class="punchmb">
+					<ul class="bui-list punchlist">
+						<li class="bui-btn">
+						    <div class="span80">2018-07-06 11:05:45</div>
+						    <div class="span20">+10</div>
+						</li>
+						<li class="bui-btn">
+						    <div class="span80">2018-07-06 11:05:45</div>
+						    <div class="span20">+10</div>
+						</li>
+						<li class="bui-btn">
+						    <div class="span80">2018-07-06 11:05:45</div>
+						    <div class="span20">+10</div>
+						</li>
+						<li class="bui-btn">
+						    <div class="span80">2018-07-06 11:05:45</div>
+						    <div class="span20">+10</div>
+						</li>
+						<li class="bui-btn">
+						    <div class="span80">2018-07-06 11:05:45</div>
+						    <div class="span20">+10</div>
+						</li>
+						<li class="bui-btn">
+						    <div class="span80">2018-07-06 11:05:45</div>
+						    <div class="span20">+10</div>
+						</li>
+						<li class="bui-btn">
+						    <div class="span80">2018-07-06 11:05:45</div>
+						    <div class="span20">+10</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/jquery-2.1.4.js"></script>
+		<script src="../../js/jquery-weui.js"></script>
+		<script src="../../js/overscroll.js"></script>
+		<script>
+			// 打卡签到
+			$("#daka").click(function(event) {
+				var daka = $(this);
+				daka.css("cursor", "default").removeClass('check_indanger').unbind('click');
+				$.toptip('签到成功', 'warning');
+				$(".sign-date").each(function() {
+					if($(this).find(".sign-date-1").css("display") == "block") {
+						$.toptip('签到成功', 'warning');
+					}
+					$(this).find(".sign-date-1").show();
+				});
+				var praise_txt = $("#num");
+				var num = parseInt(praise_txt.text());
+				if(praise_txt.text(num)) {
+					num += 1;
+					praise_txt.text(num)
+				}
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>商机询盘</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/weui.min.css">
+		<link rel="stylesheet" href="../../css/jquery-weui.css">
+		<link rel="stylesheet" href="../../css/app.css">
+		<style>
+			.weui-popup__modal .modal-content{padding-top: 44px;padding-bottom: 44px;}
+			.scroll{background: #f5f5f5;position:absolute; overflow:scroll; -webkit-overflow-scrolling: touch; top:44px; left:0; bottom:44px; right:0;}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="header_bar">
+			<div class="header_fl">
+				<a href="../../index.html" class="icon icon-back"></a>
+			</div>
+			<div class="header_ct">详情页</div>
+			<div class="header_fr"></div>
+		</header>
+
+		<div class="scroll">
+			<div class="detail">
+				<div class="title">
+					<h3><span class="blue">个人</span>隧道施工采购21KW发隧道施工采购21KW隧道隧道施工采购21KW发隧道施工采购21KW隧道</h3>
+					<p>2018-07-10 14:20:24</p>
+				</div>
+				<div class="box">
+					<div class="bui-fluid pb">
+						<div class="span6">
+							<label>倒计时</label>
+							<div class="time-item">
+								<!--<strong class="day">0</strong>-->
+								<strong class="hour"><s id="h"></s>22</strong>
+								<i>:</i>
+								<strong class="minute"><s></s>39</strong>
+								<i>:</i>
+								<strong class="second"><s></s>22</strong>
+							</div>
+						</div>
+						<div class="span6">
+							<div class="contact">
+								<i class="icon-ziyuan"></i>接单后可见联系方式
+							</div>
+						</div>
+					</div>
+					<div class="bui-fluid pb">
+						<div class="span12">
+							<label>收货地</label>
+							<span>浙江省<em>|</em>台州市</span>
+						</div>
+					</div>
+					<div class="bui-fluid pb">
+						<div class="span12">
+							<label>采购量</label>
+							<span>1台/套</span>
+						</div>
+					</div>
+					<div class="bui-fluid pb">
+						<div class="span12">
+							<label>联系人</label>
+							<span>李欣欣</span>
+							<b>138****1457</b>
+						</div>
+					</div>
+					<div class="bui-fluid pb">
+						<div class="span12">
+							<label>地址</label>
+							<span>广东省广州市天河区东圃二马路</span>
+						</div>
+					</div>
+					<div class="bui-fluid pb">
+						<div class="span12">
+							<label>附件</label>
+							<!--未买-->
+							<!--<a href="javascript:;" id="show-alert">查看附件</a>-->
+
+							<!--已买-->
+							<a href="javascript:;" id="bought">查看附件</a>
+						</div>
+					</div>
+
+					<div class="bui-fluid pb progress-bar-outer">
+						<div class="span9">
+							<div class="progress w">
+								<div class="progress-bar progress-bar-info" style="width:30%;"></div>
+								<div class="number">30%</div>
+							</div>
+						</div>
+						<div class="span3 right">可购买4次</div>
+					</div>
+				</div>
+			</div>
+			<div class="detail">
+				<div class="depict">
+					<h1>采购描述</h1>
+					<p>采购描述内容位置，采购描述内容位置采购描述内容位置，采购描述内容位置采购描述内容位置，采购描述内容位置。</p>
+				</div>
+			</div>
+			<div class="detail">
+				<div class="depict">
+					<h1>接单记录</h1>
+					<table class="bui-table">
+						<tbody>
+							<tr>
+								<th>接单方</th>
+								<th>接单时间</th>
+								<th>接单数</th>
+							</tr>
+							<tr>
+								<td>张**</td>
+								<td>2018.7.30 11:30</td>
+								<td>2</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="detail">
+				<div class="depict">
+					<h1>推荐商机</h1>
+					<ul class="bui-list">
+						<li class="bui-btn bui-box">
+							<div class="span1">
+								<div class="item-title">
+									<div class="ellipsis">隧道施工采购21KW发电机隧道施工采购21KW发电机</div>
+									<div class="time bui-right">10分钟</div>
+								</div>
+								<div class="item-text">
+									<span class="bui-left">收货地：湖南省 | 长沙市</span>
+									<span class="time gray bui-right">可购买<em>10</em>次</span>
+								</div>
+							</div>
+						</li>
+						<li class="bui-btn bui-box">
+							<div class="span1">
+								<div class="item-title">
+									<div class="ellipsis">隧道施工采购21KW发电机隧道施工采购21KW发电机</div>
+									<div class="time bui-right">10分钟</div>
+								</div>
+								<div class="item-text">
+									<span class="bui-left">收货地：湖南省 | 长沙市</span>
+									<span class="time gray bui-right">可购买<em>10</em>次</span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="chatbar">
+			<div class="bui-fluid">
+				<div class="span6">
+					<div class="bui-btn bui-lightblue btnpay open-popup" data-target="#half">购买剩余</div>
+				</div>
+				<div class="span6">
+					<div class="bui-btn bui-blue btnorders open-popup" data-target="#half">立即接单</div>
+				</div>
+			</div>
+			<!--<div class="bui-fluid">
+				<div class="span12">
+					<div class="bui-btn bui-disabled">已达上限</div>
+				</div>
+			</div>
+			<div class="bui-fluid">
+				<div class="span12">
+					<div class="bui-btn btn-disabled">已结束</div>
+				</div>
+			</div>-->
+		</div>
+
+		<!--支付弹窗-->
+		<div id="half" class='weui-popup__container popup-bottom'>
+			<div class="weui-popup__overlay"></div>
+			<div class="weui-popup__modal">
+				<div class="toolbar">
+					<div class="toolbar-inner">
+						<div class="price">
+					        <div class="bui-box">
+							    <div class="span6">
+							        <label>商品价格</label>
+							        <span class="red">20000000</span>
+							    </div>
+							    <div class="span6">
+							        <label>金币余额</label>
+							        <span class="red">20000000</span>
+							    </div>
+							</div>
+							<!--<div class="close">关闭</div>-->
+					    </div>
+						<a href="javascript:;" class="picker-button close-popup">关闭</a>
+					</div>
+				</div>
+				<div class="modal-content">
+					<div class="weui-grids">
+						<div class="weui-cells weui-cells_checkbox">
+							<label class="weui-cell weui-check__label" for="s11">
+					            <div class="weui-cell__hd">
+					                <input type="radio" class="weui-check" name="checkbox1" id="s11" checked="checked">
+					                <i class="weui-icon-checked"></i>
+					            </div>
+					            <div class="weui-cell__bd">
+					                <p>金币</p>
+					            </div>
+					        </label>
+							<label class="weui-cell weui-check__label" for="s12">
+					            <div class="weui-cell__hd">
+					                <input type="radio" name="checkbox1" class="weui-check" id="s12">
+					                <i class="weui-icon-checked"></i>
+					            </div>
+					            <div class="weui-cell__bd">
+					                <p>微信支付</p>
+					            </div>
+					        </label>
+						</div>
+						<div class="vip">V1金牌会员购买询盘只需9折</div>
+						<div class="vip">成为会员，购买询盘将享受大量折扣<a href="">开通</a></div>
+					</div>
+					<a href="#" class="btn-save">立即接单</a>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/jquery-2.1.4.js"></script>
+		<script src="../../js/fastclick.js"></script>
+		<script>
+			$(function() {
+				FastClick.attach(document.body);
+			});
+		</script>
+		<script src="../../js/jquery-weui.js"></script>
+		<script src="../../js/overscroll.js"></script>
+		<script>
+			// 倒计时
+			var intDiff = parseInt(600000); //倒计时总秒数量
+			function timer(intDiff) {
+				window.setInterval(function() {
+					var day = 0,
+						hour = 0,
+						minute = 0,
+						second = 0; //时间默认值		
+					if(intDiff > 0) {
+						day = Math.floor(intDiff / (60 * 60 * 24));
+						hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+						minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+						second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+					}
+					if(minute <= 9) minute = '0' + minute;
+					if(second <= 9) second = '0' + second;
+					$('.day').html(day + "");
+					$('.hour').html('<s id="h"></s>' + hour + '');
+					$('.minute').html('<s></s>' + minute + '');
+					$('.second').html('<s></s>' + second + '');
+					intDiff--;
+				}, 1000);
+			}
+			timer(intDiff);
+
+			// 未购买弹窗
+			$(document).on("click", "#show-alert", function() {
+				$.modal({
+					title: "",
+					text: "购买后才可浏览附件内容！",
+					buttons: [
+						{
+							text: "确定",
+							onClick: function() {
+								//$.alert("你选择了确定");
+							}
+					    }
+					]
+				});
+			});
+
+			// 已购买弹窗
+			$(document).on("click", "#bought", function() {
+				$.modal({
+					title: "",
+					text: "是否下载附件？",
+					buttons: [{
+							text: "否",
+							className: "default"
+						},
+						{
+							text: "是",
+							onClick: function() {
+								//$.alert("你选择了确定");
+							}
+					    }
+					]
+				});
+			});
+
+		</script>
+	</body>
+
+</html>

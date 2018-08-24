@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>商机询盘</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/weui.min.css">
+		<link rel="stylesheet" href="../../css/jquery-weui.css">
+		<link rel="stylesheet" href="../../css/mobiscroll.css">
+		<link rel="stylesheet" href="../../css/app.css">
+		<style>
+			body{ background: #f5f5f5;}
+			.mbsc-ios .dw-li{ text-align: center;}
+		</style>
+		<script src="../../js/jquery-2.1.4.js"></script>
+		<script src="../../js/mobiscroll.js"></script>
+	</head>
+
+	<body ontouchstart>
+
+		<header class="header_bar">
+			<div class="header_fl">
+				<a href="../mine/mine.html" class="icon icon-back"></a>
+			</div>
+			<div class="header_ct">通知设置</div>
+			<div class="header_fr"></div>
+		</header>
+
+		<div class="top-content">
+			<div class="setup">
+				<div class="weui-cells">
+					<div class="weui-cell">
+						<div class="weui-cell__bd">接收询盘提醒</div>
+						<div class="weui-cell__ft">
+							<input class="weui-switch show" type="checkbox">
+						</div>
+					</div>
+				</div>
+				<div class="weui-cells__tips">关闭后，将不会为您通知最新的询盘商机。</div>
+			</div>
+			<div class="hide">
+				<div class="weui-cells">
+					<div class="weui-cell">
+						<div class="weui-cell__bd">设置时间段</div>
+						<div class="weui-cell__ft">
+							<label for="switchCP" class="weui-switch-cp">
+					            <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked">
+					            <div class="weui-switch-cp__box"></div>
+					        </label>
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__bd">开始时间</div>
+						<div class="weui-cell__bd">
+							<input class="weui-input" id="start-time" name="input_date" type="text" value="" placeholder="选择开始时间" readonly/>
+				        </div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__bd">结束时间</div>
+						<div class="weui-cell__bd">
+							<input class="weui-input" id="end-time" name="input_date" type="text" value="" placeholder="选择结束时间" readonly/>
+						</div>
+					</div>
+				</div>
+				<div class="weui-cells__tips">设置后，将只在对应时间段内发送通知</div>
+			</div>
+		</div>
+
+		
+		<script>
+
+				
+				// 设置时间
+				$(".show").click(function() {
+					$(".hide").toggle();
+				});
+				
+				// 禁止手机自带键盘弹出
+				$(".weui-input").focus(function(){
+			        document.activeElement.blur();
+			    });
+				
+				// 选择时间
+//				var calendartime = new lCalendar();
+//				calendartime.init({
+//					'trigger': '#start-time',
+//					'type': 'time'
+//				});
+//				
+//				var calendartime = new lCalendar();
+//				calendartime.init({
+//					'trigger': '#end-time',
+//					'type': 'time'
+//				});
+				var theme = "ios";
+		        var mode = "scroller";
+		        var display = "bottom";
+		        var lang="zh";
+				$('#start-time').mobiscroll().time({
+		            theme: theme,
+		            mode: mode,
+		            display: display,
+		            lang: lang
+		        });
+		        $('#end-time').mobiscroll().time({
+		            theme: theme,
+		            mode: mode,
+		            display: display,
+		            lang: lang
+		        });
+
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>商机询盘</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/weui.min.css">
+		<link rel="stylesheet" href="../../css/jquery-weui.css">
+		<link rel="stylesheet" href="../../css/app.css">
+		<style>
+			.bg-warning {background-color: rgba(0, 0, 0, 0.6);}
+			.scroll{background: #f5f5f5;position:absolute; overflow:scroll; -webkit-overflow-scrolling: touch; top:44px; left:0; bottom:0; right:0;}
+		</style>
+	</head>
+
+	<body ontouchstart>
+		
+		<header class="header_bar">
+			<div class="header_fl">
+				<a href="../mine/mine.html" class="icon icon-back"></a>
+			</div>
+			<div class="header_ct">充值</div>
+			<div class="header_fr"></div>
+		</header>
+
+		<div class="scroll">
+			<div class="recharge">
+				<h1>充值金额</h1>
+				<div class="weui-cell">
+	                <div class="weui-cell__hd"><label class="weui-label">￥</label></div>
+	                <div class="weui-cell__bd">
+	                    <input class="weui-input" id="Recharge" type="tel" placeholder="输入充值金额">
+	                </div>
+	            </div>
+	            <a class="btn-blue" href="#">充值</a>
+			</div>
+		</div>
+		
+		<script src="../../js/jquery-2.1.4.js"></script>
+		<script src="../../js/jquery-weui.js"></script>
+		<script src="../../js/overscroll.js"></script>
+		<script>
+			$('.btn-blue').click(function() {
+				var Recharge = $("#Recharge").val();
+				if(Recharge == '') {
+					$.toptip('充值金额不能为空', 'warning');
+					return false;
+				} else{
+					$.showLoading();
+					setTimeout(function() {
+						$.hideLoading();
+					}, 2000)
+				}
+			});
+		</script>
+	</body>
+
+</html>

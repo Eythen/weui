@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>商机询盘</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/weui.min.css">
+		<link rel="stylesheet" href="../../css/jquery-weui.css">
+		<link rel="stylesheet" href="../../css/mescroll.min.css">
+		<link rel="stylesheet" href="../../css/app.css">
+		<style>
+			body {background: #fff;}
+			.mescroll { position: fixed; top: 44px; bottom: 0; width: 100%; height: auto; }
+		</style>
+	</head>
+
+	<body ontouchstart>
+
+		<div class="hot-header">
+			<a href="search.html" class="icon icon-back close-popup"></a>
+			<input id="keyword" type="text" placeholder="请输入搜索关键词">
+			<p id="search" class="btn-right">搜索</p>
+		</div>
+
+
+		<div id="mescroll" class="mescroll">
+            <!--搜索结果-->
+			<ul id="productlist" class="productlist">
+				<!--<li class="bui-btn">
+					<div class="bui-fluid">
+					    <div class="span9">
+					    	<div class="mr">
+						    	<div class="title">
+						    		<h3><span class="blue">个人</span>隧道施工采购21KW发隧道施工采购21KW隧道隧道施工采购21KW发隧道施工采购21KW隧道</h3>
+						    	</div>
+							    <div class="span12 mpd">收货地：湖南省<em>|</em>长沙市</div>
+							    <div class="span12">
+							    	<p>描述：江豪发电机组有限公司主要负责华南地区的柴油区的柴油</p>
+							    </div>
+								<div class="progress-bar-outer">
+									<div class="progress">
+										<div class="progress-bar progress-bar-info" style="width:30%;"></div>
+										<div class="progress_number">30%</div>
+									</div>
+								</div>
+							</div>
+					    </div>
+					    <div class="span3">
+					    	<div class="ml">
+					    		<time>7月21日</time>
+					    		<h1>5<i>次</i></h1>
+					    		<p>可购买次数</p>
+					    		<div class="mt_48">
+					    			<div class="bui_btn bui-blue">立即接单</div>
+					                <div class="bui_btn bui-gray">已结束</div>
+					                <div class="bui_btn bui-lightblue">已达上限</div>
+					    		</div>
+					    	</div>
+					    </div>
+					</div>
+				</li>-->
+			</ul>
+		</div>
+
+		<script src="../../js/jquery-2.1.4.js"></script>
+		<script src="../../js/mescroll.min.js"></script>
+		<script>
+			$(function() {
+				// 创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,重置列表数据;
+				var totalSize = 0;
+				var mescroll = new MeScroll("mescroll", {
+					down: {
+						auto: false
+					},
+					up: {
+						callback: getListData,
+						isBounce: false,
+						noMoreSize: 0,
+						empty: {
+							icon: "../../images/search.png",
+							tip: "暂无相关数据",
+						},
+						clearEmptyId: "productlist",
+						toTop: {
+							src: "../../images/totop.png",
+							offset: 500
+						}
+					}
+				});
+
+				//当前关键词
+				var curWord = null;
+				//搜索按钮
+				$("#search").click(function() {
+					var word = $("#keyword").val();
+					if(word) {
+						curWord = word; //更新关键词
+						mescroll.resetUpScroll(); //重新搜索,重置列表数据
+					}
+				})
+				/*联网加载列表数据  page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
+				function getListData(page) {
+					//联网加载数据
+					getListDataFromNet(page.num, page.size, function(curPageData) {
+						console.log("page.num=" + page.num + ", page.size=" + page.size + ", curPageData.length=" + curPageData.length);
+						mescroll.endBySize(curPageData.length, curPageData.totalSize);
+						setListData(curPageData);
+					}, function() {
+						mescroll.endErr();
+					});
+				}
+
+				/*设置列表数据*/
+				function setListData(curPageData) {
+					var listDom = document.getElementById("productlist");
+					for(var i = 0; i < curPageData.length; i++) {
+						var el = curPageData[i];
+						
+						var str = '	<a href="pages/detail/detail.html" class="bui-fluid">';
+							str += '		<div class="span9">';
+							str += '		    <div class="mr">';
+							str += '			    <div class="title">';
+							str += '			    	<h3><span class="blue">个人</span>' + el.name + '</h3>';
+							str += '			    </div>';
+							str += '				<div class="span12 mpd">收货地：' + el.province + '<em>|</em>' + el.city + '</div>';
+							str += '				<div class="span12">';
+							str += '				    <p>描述：' + el.depict + '</p>';
+							str += '				</div>';
+							str += '               <div class="progress-bar-outer">';
+							str += '				    <div class="progress">';
+							str += '					    <div class="progress-bar progress-bar-info" style="width:50%;"></div>';
+							str += '					    <div class="progress_number">50%</div>';
+							str += '				    </div>';
+							str += '			    </div>';
+							str += '			</div>';
+							str += '		</div>';
+							str += '		<div class="span3">';
+							str += '		    <div class="ml">';
+							str += '		    	<time>' + el.date + '</time>';
+							str += '		    	<h1>' + el.mun + '<i>次</i></h1>';
+							str += '		    	<p>可购买次数</p>';
+							str += '               <div class="mt_48">';
+							str += '                   <div class="bui_btn bui-blue">立即接单</div>';
+							//			str += '                   <div class="bui_btn bui-gray">已结束</div>';
+							//			str += '                   <div class="bui_btn bui-lightblue">已达上限</div>';
+							str += '		        </div>';
+							str += '		    </div>';
+							str += '		 </div>';
+							str += '	 </a>';
+
+						var liDom = document.createElement("li");
+						liDom.innerHTML = str;
+						listDom.appendChild(liDom);
+					}
+				}
+
+				// 联网加载列表数据
+				function getListDataFromNet( pageNum, pageSize, successCallback, errorCallback) {
+					//延时一秒,模拟联网
+					setTimeout(function() {
+						$.ajax({
+							type: 'GET',
+							url: '../../json/product.json',
+							dataType: 'json',
+							success: function(dataAll) {
+								
+								//模拟服务器接口的搜索
+			                	var data=[];
+		                		for (var i = 0; i < pageSize; i++) {
+		                			if (dataAll[i].name.indexOf(curWord)!=-1) {
+		                				data.push(dataAll[i]);
+		                			}
+		                		}
+
+								//模拟服务器接口的分页
+								var listData = [];
+								for(var i = 0; i < pageSize; i++) {
+									if(i == data.length) break;
+									listData.push(data[i]);
+								}
+								successCallback(listData);
+							},
+							error: errorCallback
+						});
+					}, 500)
+				}
+
+			});
+		</script>
+	</body>
+
+</html>

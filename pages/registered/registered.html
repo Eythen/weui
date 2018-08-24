@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>注册</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/weui.min.css">
+		<link rel="stylesheet" href="../../css/jquery-weui.css">
+		<link rel="stylesheet" href="../../css/app.css">
+		<style>
+			.bg-warning {background-color: rgba(0, 0, 0, 0.6);}
+			.scroll{background: #fff;position:absolute; overflow:scroll; -webkit-overflow-scrolling: touch; top:0; left:0; bottom:0; right:0;}
+		</style>
+	</head>
+
+	<body ontouchstart>
+        <div class="scroll">
+			<div class="logo-pd">
+				<div class="logo"><img src="../../images/face4.png" alt=""></div>
+			</div>
+			<div class="login_form">
+				<div class="weui-cells">
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
+						<div class="weui-cell__bd">
+							<input class="weui-input" id="phone" type="tel" placeholder="请输入手机号">
+						</div>
+					</div>
+					<div class="weui-cell weui-cell_vcode">
+						<div class="weui-cell__hd">
+							<label class="weui-label">验证码</label>
+						</div>
+						<div class="weui-cell__bd">
+							<input class="weui-input" id="code" type="tel" placeholder="请输入验证码">
+						</div>
+						<div class="weui-cell__ft">
+							<button class="weui-vcode-btn">获取验证码</button>
+						</div>
+					</div>
+				</div>
+				<a href="#" class="login-blue">注册</a>
+				<div class="weui-agree">
+		            <span class="weui-agree__text">注册代表您已阅读并同意以下协议<a href="protocol.html">《商机询盘服务协议》</a></span>
+		        </div>
+			</div>
+		</div>
+
+		<script src="../../js/jquery-2.1.4.js"></script>
+		<script src="../../js/jquery-weui.js"></script>
+		<script src="../../js/overscroll.js"></script>
+		<script>
+			// 点击触发倒计时
+			$(".weui-vcode-btn").on("click", function() {
+				var isDisable = $(this).hasClass("disabled");
+				if(!isDisable) {
+					$(this).addClass("disabled");
+					$.toptip('验证码发送', 'warning');
+					if(timeout) {
+						clearTimeout(timeout);
+					}
+					countdown.call(this);
+				}
+			})
+			// 倒计时
+			var countnum = 60,
+				timeout;
+
+			function countdown(_self) {
+				_self = _self || this;
+				var arg = arguments;
+				var $this = $(_self);
+				if(countnum == 0) {
+					$this.removeClass("disabled");
+					$this.text("获取验证码");
+					countnum = 60;
+					clearTimeout(timeout);
+					return;
+				} else {
+					$this.addClass("disabled");
+					$this.text("重新发送(" + countnum + ")");
+					countnum--;
+				}
+				// 自执行
+				timeout = setTimeout(function() {
+					countdown(_self)
+				}, 1000)
+			}
+
+			// 输入框判断
+			$('.login-blue').click(function() {
+				var phone = $("#phone").val();
+				var reg = /^1[3|4|5|7|8]\d{9}$/;
+				var code = $("#code").val();
+				if(phone == '') {
+					$.toptip('输入有效11位数手机号码', 'warning');
+					return false;
+				} else if(!reg.test(phone)) {
+					$.toptip('输入手机有误', 'warning');
+					return false;
+				} else if(code == '') {
+					$.toptip('输入有效验证码', 'warning');
+					return false;
+				} else{
+					$.showLoading();
+					setTimeout(function() {
+						$.hideLoading();
+					}, 2000)
+				}
+			});
+		</script>
+	</body>
+
+</html>

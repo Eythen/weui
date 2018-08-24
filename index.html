@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>商机询盘</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+		<link rel="stylesheet" href="css/mescroll.min.css">
+		<link rel="stylesheet" href="css/jquery-labelauty.css">
+		<link rel="stylesheet" href="css/app.css">
+		<style>
+			.swiper-container{width: 100%;}
+			.swiper-container img{display: block;width: 100%;}
+			.swiper-container-horizontal>.swiper-pagination-bullets{bottom: 5px;}
+			.swiper-pagination-bullet{width: 5px;height: 5px;}
+			.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet{margin: 0 2px;}
+			.swiper-pagination-bullet-active{background: #37B1F4;}
+			.mescroll { position: fixed; top: 0; bottom: 51px; width: 100%; height: auto; }
+		</style>
+
+	</head>
+
+	<body ontouchstart>
+        
+        <div id="mescroll" class="mescroll">
+			<!--banner-->
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide"><img src="images/banner1.jpg" /></div>
+					<div class="swiper-slide"><img src="images/banner2.jpg" /></div>
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+	
+			<!--搜索-->
+			<div class="search-white">
+				<a href="pages/search/search.html" class="search"><i class="icon-search"></i>搜索商机</a>
+			</div>
+	
+			<!--筛选-->
+			<div class="screening">
+				<ul>
+					<li class="Regional"><span>类型</span></li>
+					<li class="Sort"><span>分类</span></li>
+					<li class="Brand"><span>地区</span></li>
+				</ul>
+			</div>
+			<!--类型-->
+			<div class="Dropdown1">
+				<ul class="Dropdown_bj dowebok">
+					<li><input type="checkbox" name="fruit" data-labelauty="发电机"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="空压机"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="工程建筑机械"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="机床设备"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="清洁设备"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="制冷设备"></li>
+					<div class="save primary">确定</div>
+				</ul>
+			</div>
+	
+			<!-- 行业-->
+			<div class="Dropdown2">
+				<ul class="Dropdown_bj dowebok">
+					<li><input type="checkbox" name="fruit" data-labelauty="发电机"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="空压机"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="工程建筑机械"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="机床设备"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="清洁设备"></li>
+					<li><input type="checkbox" name="fruit" data-labelauty="制冷设备"></li>
+					<div class="save primary">确定</div>
+				</ul>
+			</div>
+	
+			<!--地区-->
+			<div class="Dropdown3">
+				<ul class="Dropdown_bj dowebok">
+					<li><input type="checkbox" name="checkbox" class="goodscheck shopCheck" data-labelauty="全国"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="江浙"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="山东"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="陕西"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="重庆"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="安徽"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="福建"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="河南"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="河北"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="湖北"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="湖南"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="江西"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="云南"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="香港"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="黑龙江"></li>
+					<li><input type="checkbox" name="checkbox" class="goodscheck goodsCheck" data-labelauty="内蒙古"></li>
+					<div class="save primary">确定</div>
+				</ul>
+			</div>
+	
+			
+	        <!--搜索结果-->
+			<ul id="productlist" class="bui-list productlist">
+				<!--<li class="bui-btn">
+					<a href="pages/detail/detail.html" class="bui-fluid">
+						<div class="span9">
+							<div class="mr">
+								<div class="title">
+									<h3><span class="blue">个人</span>隧道施工采购21KW发隧道施工采购21KW隧道隧道施工采购21KW发隧道施工采购21KW隧道</h3>
+								</div>
+								<div class="span12 mpd">收货地：湖南省<em>|</em>长沙市</div>
+								<div class="span12">
+									<p>描述：江豪发电机组有限公司主要负责华南地区的柴油区的柴油</p>
+								</div>
+								<div class="progress-bar-outer">
+									<div class="progress">
+										<div class="progress-bar progress-bar-info" style="width:30%;"></div>
+										<div class="progress_number">30%</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="span3">
+							<div class="ml">
+								<time>7月21日</time>
+								<h1>5<i>次</i></h1>
+								<p>可购买次数</p>
+								<div class="mt_48">
+									<div class="bui_btn bui-blue">立即接单</div>
+									<div class="bui_btn bui-gray">已结束</div>
+					                <div class="bui_btn bui-lightblue">已达上限</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</li>-->
+		    </ul>
+		</div>
+		<footer class="footer">
+			<a href="index.html" class="item on">
+				<div class="icon">
+					<img src="images/zs_on.png" />
+				</div>
+				<span class="text">询盘</span>
+			</a>
+			<a href="pages/publish/publish.html" class="item">
+				<div class="icon">
+					<img src="images/fb.png" />
+				</div>
+				<span class="text">分布</span>
+			</a>
+			<a href="pages/mine/mine.html" class="item">
+				<div class="icon">
+					<img src="images/my.png" />
+				</div>
+				<span class="text">我的</span>
+			</a>
+		</footer>
+		
+		<!--打卡弹窗-->
+		<div class="new_user" id="new_user">
+			<div class="new_pic">
+				<img src="images/Clockin.jpg">
+			</div>
+			<h3>打卡预约！打卡后为您提供20条商机！</h3>
+		    <a class="Clockin_btn" href="pages/punch/punch.html">打卡签到</a>
+			<div class="icon-guanbi" onclick="hideNewUser()"></div>
+		</div>
+		<div class="overlay" id="overlay"></div>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery-weui.js"></script>
+		<script src="js/swiper.js"></script>
+		<script src="js/mescroll.min.js"></script>
+		<script src="js/jquery-labelauty.js"></script>
+		<script src="js/index.js"></script>
+		<script>
+			$(function() {
+
+			    // 列表展示加载
+				var totalSize = 0;
+				var mescroll = new MeScroll("mescroll", {
+					up: {
+						callback: getListData,
+						isBounce: false,
+						noMoreSize: 0,
+						empty: {
+							icon: "images/search.png",
+							tip: "暂无相关数据",
+						},
+						clearEmptyId: "productlist",
+						toTop: {
+							src: "images/totop.png",
+							offset: 500
+						}
+					}
+				})
+				/*联网加载列表数据  page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
+				function getListData(page) {
+					//联网加载数据
+					getListDataFromNet(page.num, page.size, function(curPageData) {
+						console.log("page.num=" + page.num + ", page.size=" + page.size + ", curPageData.length=" + curPageData.length);
+						mescroll.endBySize(curPageData.length, curPageData.totalSize);
+						setListData(curPageData);
+					}, function() {
+						mescroll.endErr();
+					});
+				}
+				/*列表数据*/
+				function setListData(curPageData) {
+					var listDom = document.getElementById("productlist");
+					for(var i = 0; i < curPageData.length; i++) {
+						var el = curPageData[i];
+
+						var str = '	<a href="pages/detail/detail.html" class="bui-fluid">';
+							str += '		<div class="span9">';
+							str += '		    <div class="mr">';
+							str += '			    <div class="title">';
+							str += '			    	<h3><span class="blue">个人</span>' + el.name + '</h3>';
+							str += '			    </div>';
+							str += '				<div class="span12 mpd">收货地：' + el.province + '<em>|</em>' + el.city + '</div>';
+							str += '				<div class="span12">';
+							str += '				    <p>描述：' + el.depict + '</p>';
+							str += '				</div>';
+							str += '               <div class="progress-bar-outer">';
+							str += '				    <div class="progress">';
+							str += '					    <div class="progress-bar progress-bar-info" style="width:50%;"></div>';
+							str += '					    <div class="progress_number">50%</div>';
+							str += '				    </div>';
+							str += '			    </div>';
+							str += '			</div>';
+							str += '		</div>';
+							str += '		<div class="span3">';
+							str += '		    <div class="ml">';
+							str += '		    	<time>' + el.date + '</time>';
+							str += '		    	<h1>' + el.mun + '<i>次</i></h1>';
+							str += '		    	<p>可购买次数</p>';
+							str += '               <div class="mt_48">';
+							str += '                   <div class="bui_btn bui-blue">立即接单</div>';
+							//			str += '                   <div class="bui_btn bui-gray">已结束</div>';
+							//			str += '                   <div class="bui_btn bui-lightblue">已达上限</div>';
+							str += '		        </div>';
+							str += '		    </div>';
+							str += '		 </div>';
+							str += '	 </a>';
+
+						var liDom = document.createElement("li");
+						liDom.innerHTML = str;
+						listDom.appendChild(liDom);
+					}
+				}
+				/*联网加载列表数据*/
+				function getListDataFromNet(pageNum, pageSize, successCallback, errorCallback) {
+					setTimeout(function() {
+						$.ajax({
+							type: 'GET',
+							url: 'json/product.json',
+							dataType: 'json',
+							success: function(data) {
+								//模拟分页数据
+								var listData = [];
+								for(var i = 0; i < pageSize; i++) {
+									if(i == data.length) break;
+									listData.push(data[i]);
+								}
+								successCallback(listData);
+							},
+							error: errorCallback
+						});
+					}, 1000)
+				}
+			});
+			
+			// 地区全选
+			$(".goodsCheck").click(function() {
+				var goods = $(this).closest(".dowebok").find(".goodsCheck");
+				var goodsC = $(this).closest(".dowebok").find(".goodsCheck:checked");
+				var Shops = $(this).closest(".dowebok").find(".shopCheck");
+				if(goods.length == goodsC.length) {
+					Shops.prop('checked', true);
+				} else {
+					Shops.prop('checked', false);
+				}
+			});
+			$(".shopCheck").click(function() {
+				if($(this).prop("checked") == true) {
+					$(this).parents(".dowebok").find(".goodscheck").prop('checked', true);
+				} else {
+					$(this).parents(".dowebok").find(".goodscheck").prop('checked', false);
+				}
+			});
+
+		    // 多选效果
+//			$("#select li").click(function() {
+//				var type = $(this).attr("date-type");
+//				var copyThisB = $(this).clone();
+//				if($(this).hasClass("selected")) {
+//					$("#select li[date-type='" + type + "']").fadeToggle();
+//				}
+//				$(this).toggleClass("selected");
+//			});
+//
+//			// 单选效果
+//			$('#Categorytw li').click(function() {
+//				var cook = $(this).index();
+//				$('#Categorytw li').eq(cook).addClass('selected').siblings().removeClass('selected');
+//			})
+		</script>
+	</body>
+
+</html>

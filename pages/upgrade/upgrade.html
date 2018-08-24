@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>商机询盘</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/weui.min.css">
+		<link rel="stylesheet" href="../../css/jquery-weui.css">
+		<link rel="stylesheet" href="../../css/app.css">
+		<style>
+			.scroll{background: #f5f5f5;position:absolute; overflow:scroll; -webkit-overflow-scrolling: touch; top:44px; left:0; bottom:44px; right:0;}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="header_bar">
+			<div class="header_fl">
+				<a href="../mine/mine.html" class="icon icon-back"></a>
+			</div>
+			<div class="header_ct">升级会员</div>
+			<div class="header_fr"></div>
+		</header>
+		
+		<div class="scroll">
+			<div class="upgrade">
+				<h1>开通会员</h1>
+				<ul class="vip_navicon">
+		            <li class="disabled">
+	                	<h1>￥200</h1>
+	                	<p>V1金牌会员</p>
+	                	<p>9.5折购买</p>
+		            </li>
+		            <li>
+	                	<h1>￥300</h1>
+	                	<p>V2金牌会员</p>
+	                	<p>9.5折购买</p>
+		            </li>
+		            <li>
+	                	<h1>￥500</h1>
+	                	<p>V3金牌会员</p>
+	                	<p>9.5折购买</p>
+		            </li>
+		        </ul>
+			</div>
+		</div>
+		<div class="chatbar">
+			<div class="bui-fluid">
+				<div class="span12">
+					<div class="bui-btn bui-blue btnorders">购买</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/jquery-2.1.4.js"></script>
+		<script src="../../js/fastclick.js"></script>
+		<script>
+			$(function() {
+				FastClick.attach(document.body);
+			});
+		</script>
+		<script src="../../js/jquery-weui.js"></script>
+		<script>
+			// 单选效果
+			$('.vip_navicon li').click(function(){
+                if(!$(this).hasClass("disabled")) {
+					$(this).addClass("active").siblings().removeClass("active");
+				}
+            })
+			
+			// 弹窗支付会员
+			$(document).on("click", ".btnorders", function() {
+				$.modal({
+					title: "升级会员",
+					text: "成为V1会员后，可用九折购买询盘项目。",
+					buttons: [{
+							text: "取消",
+							className: "default"
+						},
+						{
+							text: "确定",
+							onClick: function() {
+								//$.alert("你选择了确定");
+								$.showLoading();
+								setTimeout(function() {
+									$.hideLoading();
+								}, 2000)
+							}
+					    }
+					]
+				});
+			});
+		</script>
+	</body>
+
+</html>

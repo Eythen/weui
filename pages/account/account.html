@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>账号明细</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/weui.min.css">
+		<link rel="stylesheet" href="../../css/jquery-weui.css">
+		<link rel="stylesheet" href="../../css/app.css">
+		<style>
+			body {background: #f5f5f5;}
+			.scroll{position:absolute; overflow:scroll; -webkit-overflow-scrolling: touch; top:44px; left:0; bottom:0; right:0;}
+		</style>
+	</head>
+
+	<body ontouchstart>
+
+		<header class="header_bar">
+			<div class="header_fl">
+				<a href="../mine/mine.html" class="icon icon-back"></a>
+			</div>
+			<div class="header_ct">账号明细</div>
+			<div class="header_fr"></div>
+		</header>
+
+		<div class="scroll">
+			<div class="account">
+				<div class="weui-cells">
+					<a class="weui-cell weui-cell_access" href="gold.html">
+						<div class="weui-cell__bd">
+							<p>金币明细</p>
+						</div>
+						<div class="weui-cell__ft"></div>
+					</a>
+					<a class="weui-cell weui-cell_access" href="record.html">
+						<div class="weui-cell__bd">
+							<p>充值记录</p>
+						</div>
+						<div class="weui-cell__ft"></div>
+					</a>
+					<a class="weui-cell weui-cell_access" href="consume.html">
+						<div class="weui-cell__bd">
+							<p>消费记录</p>
+						</div>
+						<div class="weui-cell__ft"></div>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/jquery.min.js"></script>
+		<script src="../../js/overscroll.js"></script>
+	</body>
+
+</html>

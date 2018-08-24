@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>商机询盘</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/weui.min.css">
+		<link rel="stylesheet" href="../../css/jquery-weui.css">
+		<link rel="stylesheet" href="../../css/zyUpload.css" />
+		<link rel="stylesheet" href="../../css/app.css">
+		<style>
+			body {
+				background: #f5f5f5;
+			}
+			
+			.upload_choose {
+				padding: 10px 0 0;
+			}
+			
+			.upload_preview {
+				padding: 0;
+			}
+			
+			.uploadImg img {
+				padding: 0;
+			}
+			
+			.filePicker {
+				width: 83px;
+				float: left;
+			}
+			
+			.upload_append_list {
+				margin-left: 10px;
+				margin-top: 0;
+				margin-right: 0;
+			}
+			
+			.scroll {
+				position: absolute;
+				overflow: scroll;
+				-webkit-overflow-scrolling: touch;
+				top: 44px;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				padding-bottom: 44px;
+			}
+			
+			.weui-picker-container {
+				height: 100%;
+			}
+			
+			.bg-warning {
+				background-color: rgba(0, 0, 0, 0.6);
+			}
+			
+			.weui-actionsheet__title {
+				height: 44px;
+				color: #666;
+			}
+			
+			.infotew .payment_time_title {
+				color: #666;
+				text-align: left;
+			}
+			
+			
+			
+		</style>
+	</head>
+
+	<body>
+
+		<header class="header_bar">
+			<div class="header_fl">
+				<a href="../mine/mine.html" class="icon icon-back"></a>
+			</div>
+			<div class="header_ct">个人信息</div>
+			<div class="header_fr"></div>
+		</header>
+
+		<div class="weui-content">
+			<div class="infotew">
+				<div class="weui-cells">
+					<!--<div class="weui-cell">
+						<div class="weui-cell__bd">头像</div>
+						<div class="weui-cell__ft">
+							<div class="weui-tx"><img src="../../images/face4.png"/></div>
+						</div>
+					</div>-->
+					<div class="weui-cell">
+						<div class="weui-cell__bd">姓名</div>
+						<div class="weui-cell__ft">
+							<input class="weui-input" type="text" placeholder="请输入姓名">
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__bd">手机</div>
+						<div class="weui-cell__ft">
+							<input class="weui-input flip" id="phone" type="text" placeholder="请输入手机号">
+						</div>
+					</div>
+					<div class="weui-cell panel" style="display: none;">
+						<div class="weui-cell__bd">验证码</div>
+						<div class="weui-cell__pd">
+							<input class="weui-input" id="code" type="tel" autocomplete="off" placeholder="请输入验证码">
+						</div>
+						<div class="weui-cell__ft">
+							<input id="btnSendCode" type="button" class="weui-vcode-btn" value="获取验证码" onClick="sendMessage()" />
+						</div>
+					</div>
+
+					<div class="weui-cell">
+						<div class="weui-cell__bd">身份证</div>
+						<div class="weui-cell__ft">
+							<input class="weui-input" type="text" placeholder="请输入身份证">
+						</div>
+					</div>
+					<div class="weui-cell block">
+						<h1>身份证照片上传（正面、反面）</h1>
+						<div class="itemw">
+							<div class="item1">
+								<img class="icon addImg" onclick="clickImg(this);" src="../../images/addImg.png" />
+								<input name="url" type="file" class="upload_input" onchange="change(this)" />
+								<div class="preBlock">
+									<img class="preview" alt="" name="pic" width="77" height="77" />
+								</div>
+								<img class="delete" onclick="deleteImg(this)" src="../../images/delete.png" />
+							</div>
+							<div class="item1">
+								<img class="icon addImg" onclick="clickImg(this);" src="../../images/addImg2.png" />
+								<input name="url" type="file" class="upload_input" onchange="change(this)" />
+								<div class="preBlock">
+									<img class="preview" alt="" name="pic" width="77" height="77" />
+								</div>
+								<img class="delete" onclick="deleteImg(this)" src="../../images/delete.png" />
+							</div>
+						</div>
+					</div>
+					<div class="weui-cell weui-cell_access">
+						<div class="weui-cell__bd">地区</div>
+						<div class="weui-cell__ft">
+							<input class="weui-input city" id="city" type="text" value="" placeholder="省、市、区选择" readonly>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="infotew line">
+				<div class="weui-cells">
+					<div class="weui-cell weui-cell_access">
+						<div class="weui-cell__bd">类型认证</div>
+						<div class="weui-cell__ft payment_time_title">选择类型认证</div>
+					</div>
+					<div class="weui-cells__title">主营业务</div>
+					<div class="weui-cell">
+						<textarea class="weui-textarea" placeholder="请输入文本" rows="5"></textarea>
+					</div>
+				</div>
+			</div>
+
+			<a href="#" class="btn-info" onClick="submit()">保存</a>
+
+		</div>
+
+		<div id="bg"></div>
+		<div class="payment">
+			<div class="weui-actionsheet__title">选择类型</div>
+			<div class="payment-box">
+				<ul>
+					<li>1小时内</li>
+					<li>2小时内</li>
+					<li>3小时内</li>
+					<li>5小时内</li>
+					<li>10小时内</li>
+					<li>24小时内</li>
+					<li>24小时外</li>
+				</ul>
+			</div>
+		</div>
+
+		<aside class="mask-box works-mask">
+			<div class="mask-content">
+				<p class="del-p ">您确定要删除作品图片吗？</p>
+				<p class="check-p"><span class="del-com wsdel-ok">确定</span><span class="wsdel-no">取消</span></p>
+			</div>
+		</aside>
+
+		<script src="../../js/jquery.min.js"></script>
+		<script src="../../js/jquery-weui.js"></script>
+		<script src="../../js/city-picker.js"></script>
+
+		<script>
+			// 资料上传
+			var clickImg = function(obj) {
+				$(obj).parent().find('.upload_input').click();
+			}
+			//删除
+			var deleteImg = function(obj) {
+				$(obj).parent().find('input').val('');
+				$(obj).parent().find('img.preview').attr("src", "");
+				//IE9以下
+				$(obj).parent().find('img.preview').css("filter", "");
+				$(obj).hide();
+				$(obj).parent().find('.addImg').show();
+			}
+			//选择图片
+			function change(file) {
+				//预览
+				var pic = $(file).parent().find(".preview");
+				//添加按钮
+				var addImg = $(file).parent().find(".addImg");
+				//删除按钮
+				var deleteImg = $(file).parent().find(".delete");
+
+				var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
+
+				// gif在IE浏览器暂时无法显示
+				if(ext != 'png' && ext != 'jpg' && ext != 'jpeg') {
+					if(ext != '') {
+						alert("图片的格式必须为png或者jpg或者jpeg格式！");
+					}
+					return;
+				}
+				//判断IE版本
+				var isIE = navigator.userAgent.match(/MSIE/) != null,
+					isIE6 = navigator.userAgent.match(/MSIE 6.0/) != null;
+				isIE10 = navigator.userAgent.match(/MSIE 10.0/) != null;
+				if(isIE && !isIE10) {
+					file.select();
+					var reallocalpath = document.selection.createRange().text;
+					// IE6浏览器设置img的src为本地路径可以直接显示图片
+					if(isIE6) {
+						pic.attr("src", reallocalpath);
+					} else {
+						// 非IE6版本的IE由于安全问题直接设置img的src无法显示本地图片，但是可以通过滤镜来实现             
+						pic.css("filter", "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale',src=\"" + reallocalpath + "\")");
+						// 设置img的src为base64编码的透明图片 取消显示浏览器默认图片
+						pic.attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+					}
+					addImg.hide();
+					deleteImg.show();
+				} else {
+					html5Reader(file, pic, addImg, deleteImg);
+				}
+			}
+			//H5渲染
+			function html5Reader(file, pic, addImg, deleteImg) {
+				var file = file.files[0];
+				var reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onload = function(e) {
+					pic.attr("src", this.result);
+				}
+				addImg.hide();
+				deleteImg.show();
+			}
+
+			//			$("#Dataupload").zyUpload({
+			//				//width: "320px", // 宽度
+			//				//height: "83px", // 宽度
+			//				itemWidth: "83px", // 文件项的宽度
+			//				itemHeight: "83px", // 文件项的高度
+			//				url: "/upload/UploadAction", // 上传文件的路径
+			//				multiple: true, // 是否可以多个文件上传
+			//				//dragDrop: true, // 是否可以拖动上传文件
+			//				del: true, // 是否可以删除文件
+			//				finishDel: false, // 是否在上传文件完成后删除预览
+			//				/* 外部获得的回调接口 */
+			//				onSelect: function(files, allFiles) { // 选择文件的回调方法
+			//					console.info("当前选择了以下文件：");
+			//					console.info(files);
+			//					console.info("之前没上传的文件：");
+			//					console.info(allFiles);
+			//				},
+			//				onDelete: function(file, surplusFiles) { // 删除一个文件的回调方法
+			//					console.info("当前删除了此文件：");
+			//					console.info(file);
+			//					console.info("当前剩余的文件：");
+			//					console.info(surplusFiles);
+			//				},
+			//				onSuccess: function(file) { // 文件上传成功的回调方法
+			//					console.info("此文件上传成功：");
+			//					console.info(file);
+			//				},
+			//				onFailure: function(file) { // 文件上传失败的回调方法
+			//					console.info("此文件上传失败：");
+			//					console.info(file);
+			//				},
+			//				onComplete: function(responseInfo) { // 上传完成的回调方法
+			//					console.info("文件上传完成");
+			//					console.info(responseInfo);
+			//				}
+			//			})
+
+			// 地区
+			$("#city").cityPicker({
+				title: "选择收货地",
+				onChange: function(picker, values, displayValues) {
+					console.log(values, displayValues);
+				}
+			});
+			// 禁止手机自带键盘弹出
+			$(".city").focus(function() {
+				document.activeElement.blur();
+			});
+
+			// 点击手机显示验证码
+			$(document).ready(function() {
+				$(".flip").click(function() {
+					$(".panel").toggle();
+				});
+			});
+
+			// 类型认证
+			$(".payment_time_title").click(function() {
+				$("#bg").css({
+					display: "block",
+				});
+				var $box = $('.payment');
+				$box.css({
+					display: "block",
+				});
+			});
+			// 选中关闭
+			$(".payment li").on('click', function() {
+				$("#bg,.payment").css("display", "none");
+				$(".payment_time_title").text($(this).html());
+			});
+			// 点击背景关闭
+			$("#bg").on('click', function() {
+				$("#bg,.payment").css("display", "none");
+			});
+			//			$("#certification").select({
+			//				title: "选择类型",
+			//				items: [{
+			//						value: "iPhone 3GS",
+			//						title: "01",
+			//					},
+			//					{
+			//						value: "iPhone 3GS",
+			//						title: "01",
+			//					}
+			//				],
+			//				onChange: function(d) {
+			//					console.log(this, d);
+			//				},
+			//				onClose: function() {
+			//					console.log("close");
+			//				},
+			//				onOpen: function() {
+			//					console.log("open");
+			//				},
+			//			});
+
+			var phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/; //手机号正则 
+			var count = 60; //间隔函数，1秒执行
+			var InterValObj; //timer变量，控制时间
+			var curCount; //当前剩余秒数
+			function sendMessage() {
+				curCount = count;
+				var phone = $.trim($('#phone').val());
+				if(!phoneReg.test(phone)) {
+					$.toptip('请输入有效的手机号码', 'warning');
+				}
+				// 开始计时
+				$("#btnSendCode").attr("disabled", "true");
+				$("#btnSendCode").val(+curCount + "秒再获取");
+				InterValObj = window.setInterval(SetRemainTime, 1000);
+				//向后台发送处理数据
+			}
+
+			function SetRemainTime() {
+				if(curCount == 0) {
+					window.clearInterval(InterValObj); //停止计时器
+					$("#btnSendCode").removeAttr("disabled"); //启用按钮
+					$("#btnSendCode").val("重新发送");
+				} else {
+					curCount--;
+					$("#btnSendCode").val(+curCount + "秒再获取");
+				}
+			}
+			/*提交*/
+			function submit() {
+				var phone = $("#phone").val();
+				var code = $("#code").val();
+				if(phone == '') {
+					$.toptip('请输入有效的手机号码', 'warning');
+					return false;
+				} else if(code == '') {
+					$.toptip('请输入有效验证码', 'warning');
+					return false;
+				} else {
+					$.showLoading();
+					setTimeout(function() {
+						$.hideLoading();
+					}, 2000)
+				}
+			}
+		</script>
+	</body>
+
+</html>

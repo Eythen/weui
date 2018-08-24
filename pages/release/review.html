@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>商机询盘</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/weui.min.css">
+		<link rel="stylesheet" href="../../css/jquery-weui.css">
+		<link rel="stylesheet" href="../../css/mescroll.min.css">
+		<link rel="stylesheet" href="../../css/app.css">
+		<style>
+			body {background: #f5f5f5;}
+			.mescroll{position: fixed;top: 44px;bottom: 0;width: 100%;height: auto;}
+		</style>
+	</head>
+
+	<body>
+		
+		<header class="header_bar">
+			<div class="header_fl">
+				<a href="../mine/mine.html" class="icon icon-back"></a>
+			</div>
+			<div class="header_ct">发布历史</div>
+			<div class="header_fr"></div>
+		</header>
+		
+		<div id="mescroll" class="mescroll">
+
+			<div id="navWarp">
+				<div id="navContent" class="reviewnav">
+					<a href="review.html" class="active">审核</a>
+					<a href="published.html">已发布</a>
+					<a href="over.html">已结束</a>
+				</div>
+			</div>
+			<!--展示上拉加载的数据列表-->
+			<ul id="dataList" class="review-list">
+				<!--<li>
+					<div class="weui-panel">
+			            <div class="weui-panel__bd">
+			                <div class="weui-media-box weui-media-box_appmsg">
+			                    <div class="weui-media-box__bd wl">
+			                        <h4 class="weui-media-box__title ow">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</h4>
+			                        <p class="weui-media-box__desc">2018-10-05 07:05:05</p>
+			                    </div>
+			                    <div class="weui-media-box__bd wr">
+			                        <p class="weui-media-box__desc reg">待审核</p>
+			                    </div>
+			                </div>
+			                <div class="weui-media-box weui-media-box_appmsg">
+			                    <div class="weui-media-box__bd wl">
+			                         <h4 class="weui-media-box__title ow">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</h4>
+			                        <p class="weui-media-box__desc">2018-10-05 07:05:05</p>
+			                    </div>
+			                    <div class="weui-media-box__bd wr">
+			                        <p class="weui-media-box__desc reg">审核不通过</p>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+				</li>-->
+			</ul>
+
+
+		</div>
+		
+		<script src="../../js/jquery-2.1.4.js"></script>
+		<script src="../../js/mescroll.min.js"></script>
+		<script>
+			$(function() {
+				var mescroll = new MeScroll("mescroll", {
+					up: {
+						callback: getListData,
+						isBounce: false,
+						clearEmptyId: "dataList"
+					}
+				});
+				var navWarp = document.getElementById("navWarp");
+				if(mescroll.os.ios) {
+					//ios的悬停效果,通过给navWarp添加nav-sticky样式来实现
+					navWarp.classList.add("nav-sticky");
+				} else {
+					//android和pc端悬停效果,通过监听mescroll的scroll事件,控制navContent是否为fixed定位来实现
+					navWarp.style.height = navWarp.offsetHeight + "px"; //固定高度占位,避免悬浮时列表抖动
+					var navContent = document.getElementById("navContent");
+					mescroll.optUp.onScroll = function(mescroll, y, isUp) {
+						console.log("up --> onScroll 列表当前滚动的距离 y = " + y + ", 是否向上滑动 isUp = " + isUp);
+						if(y >= navWarp.offsetTop) {
+							navContent.classList.add("nav-fixed");
+						} else {
+							navContent.classList.remove("nav-fixed");
+						}
+					}
+				}
+
+
+				/*联网加载列表数据  page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
+				function getListData(page) {
+					//联网加载数据
+					getListDataFromNet(page.num, page.size, function(curPageData) {
+						console.log("page.num=" + page.num + ", page.size=" + page.size + ", curPageData.length=" + curPageData.length);
+						mescroll.endBySize(curPageData.length, curPageData.totalSize);
+						setListData(curPageData);
+					}, function() {
+						mescroll.endErr();
+					});
+				}
+
+				/*设置列表数据*/
+				function setListData(curPageData) {
+					var listDom = document.getElementById("dataList");
+					for(var i = 0; i < curPageData.length; i++) {
+						var el = curPageData[i];
+						
+						var str = '<div class="weui-panel">';
+				            str += '<div class="weui-panel__bd">';
+				            str += '    <div class="weui-media-box weui-media-box_appmsg">';
+				            str += '        <div class="weui-media-box__bd wl">';
+				            str += '            <h4 class="weui-media-box__title ow">' + el.name + '</h4>';
+				            str += '            <p class="weui-media-box__desc">' + el.time + '</p>';
+				            str += '        </div>';
+				            str += '        <div class="weui-media-box__bd wr">';
+				            str += '            <p class="weui-media-box__desc reg">' + el.title + '</p>';
+				            str += '        </div>';
+				            str += '    </div>';
+				            str += '</div>';
+				            str += '</div>';
+
+						var liDom = document.createElement("li");
+						liDom.innerHTML = str;
+						listDom.appendChild(liDom);
+					}
+				}
+
+				// 联网加载列表数据
+				function getListDataFromNet(pageNum, pageSize, successCallback, errorCallback) {
+					//延时一秒,模拟联网
+					setTimeout(function() {
+						$.ajax({
+							type: 'GET',
+							url: '../../json/review.json',
+							dataType: 'json',
+							success: function(data) {
+								//模拟分页数据
+								var listData = [];
+								for(var i = 0; i < pageSize; i++) {
+									if(i == data.length) break;
+									listData.push(data[i]);
+								}
+								successCallback(listData);
+							},
+							error: errorCallback
+						});
+					}, 1500)
+				}
+
+			});
+		</script>
+	</body>
+</html>
